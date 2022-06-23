@@ -23,8 +23,7 @@ func InitRouter() {
 	flag.StringVar(&dir, "assets", ".", "the directory to serve files from. Defaults to the current dir")
 	
 	router := mux.NewRouter()
-	router.HandleFunc("/", pages.ErrorPageHandler())
-	router.HandleFunc("/home", createHandler(pages.Home())).Methods("GET")
+	router.HandleFunc("/", createHandler(pages.Home())).Methods("GET")
 	//router.NotFoundHandler = pages.ErrorPageHandler()
 	router.HandleFunc("/about", createHandler(pages.About())).Methods("GET")
 	router.HandleFunc("/playground", createHandler(pages.PlayGround())).Methods("GET")
@@ -32,7 +31,6 @@ func InitRouter() {
 	router.HandleFunc("/notes/{title}", createNoteHandler("Notes")).Methods("GET")
 	router.PathPrefix("/assets").Handler(http.StripPrefix("/", http.FileServer(http.Dir(dir))))
 	router.NotFoundHandler = pages.ErrorPageHandler()
-	// 404
 	AppRouter = router
 }
 

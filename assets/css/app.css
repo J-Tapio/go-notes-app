@@ -1,0 +1,33 @@
+@font-face { 
+  font-family: 'wired'; 
+  src: url('https://ik.imagekit.io/htg3gsxgz/Markdown_archives/WiredMono-Light_eRLcyD34E.woff2?ik-sdk-version=javascript-1.4.3&updatedAt=1652723545091') format('woff2');
+}
+
+body {
+  font-family: wired, monospace;
+}
+
+.navbar, .tag {
+  background-color: #28AFB0;
+}
+
+.note-container:hover {
+  background: rgb(40,175,176);
+  background: linear-gradient(180deg, rgba(40,175,176,1) 0%, rgba(255,255,255,1) 90%, rgba(255,255,255,1) 100%);
+}
+
+.note-link {
+  text-decoration: none !important;
+}
+
+.note-title {
+  margin: 0 !important;
+  //margin-bottom: 0.5em !important;
+}
+
+.social {
+  filter: invert(65%) sepia(38%) saturate(783%) hue-rotate(132deg) brightness(83%) contrast(86%);
+}
+.social:hover {
+  filter: invert(88%) sepia(5%) saturate(4890%) hue-rotate(149deg) brightness(91%) contrast(97%);
+}

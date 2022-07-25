@@ -19,7 +19,7 @@ func Page(title, path string, body g.Node) g.Node {
 		Language: "en",
 		Head: []g.Node{
 			html.Link(html.Rel("icon"), html.Type("image/x-icon"), html.Href("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/favicon-32x32_9t5v8KhSP.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656174819184")),
-			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/dist/base.min.css")),
+			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/base.min.css")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/components.min.css")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/typography.min.css")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/utilities.min.css")),

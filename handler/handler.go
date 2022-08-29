@@ -21,7 +21,7 @@ func InitRouter() {
 	var dir string
 	flag.Parse()
 	flag.StringVar(&dir, "assets", ".", "the directory to serve files from. Defaults to the current dir")
-	
+
 	router := mux.NewRouter()
 	router.HandleFunc("/", createHandler(pages.Home())).Methods("GET")
 	//router.NotFoundHandler = pages.ErrorPageHandler()
@@ -34,13 +34,11 @@ func InitRouter() {
 	AppRouter = router
 }
 
-
 func createHandler(title string, body g.Node) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		pages.Page(title, r.URL.Path, body).Render(w)
 	}
 }
-
 
 func createNoteHandler(title string) http.HandlerFunc {
 	// Success - Render note document
@@ -53,7 +51,7 @@ func createNoteHandler(title string) http.HandlerFunc {
 		// Check from database the requested note
 		documentFound, document := db.GetDocument(documentTitle)
 
-		if(!documentFound) {
+		if !documentFound {
 			pages.Page("Document not found!", r.URL.Path, pages.NotePage("<h1 class=text-center>Unfortunately the document was not found</h1>")).Render(w)
 		} else {
 			// Parse and return html as writable byte buffer
@@ -61,9 +59,10 @@ func createNoteHandler(title string) http.HandlerFunc {
 
 			if err := gMark.Convert(document.File, &documentBuffer); err != nil {
 				log.Println(err)
+				pages.Page("Document could not be rendered correctly", r.URL.Path, pages.NotePage("<h1 class=text-center>Unfortunately document could not be rendered correctly</h1>")).Render(w)
+			} else {
+				pages.Page(title, r.URL.Path, pages.NotePage(documentBuffer.String())).Render(w)
 			}
-			pages.Page(title, r.URL.Path, pages.NotePage(documentBuffer.String())).Render(w)
 		}
 	}
 }
-

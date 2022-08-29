@@ -8,9 +8,8 @@ import (
 	"go-notes-app/server"
 )
 
-
 func init() {
-	db.InitDatabaseConnection()
+	db.InitDBConnection()
 	handler.InitRouter()
 }
 
@@ -20,6 +19,7 @@ func tidyUp() {
 
 func main() {
 	server.Start()
+
 	defer tidyUp()
 	defer db.Disconnect()
 }

@@ -1,12 +1,12 @@
 package server
 
 import (
+	"context"
 	"log"
 	"net/http"
-	"time"
 	"os"
 	"os/signal"
-	"context"
+	"time"
 
 	"go-notes-app/handler"
 )
@@ -14,11 +14,11 @@ import (
 func Start() {
 	server := &http.Server{
 		Handler: handler.AppRouter,
-		Addr: ":" + os.Getenv("PORT"),
+		Addr:    ":" + os.Getenv("PORT"),
 		// From mux docs; avoid Slowloris attacks by implementing timeouts.
 		// Slowloris - partial HTTP requests.
 		WriteTimeout: 15 * time.Second,
-		ReadTimeout: 15 * time.Second,
+		ReadTimeout:  15 * time.Second,
 		IdleTimeout:  time.Second * 60,
 	}
 

@@ -17,7 +17,7 @@ func ErrorPageHandler() http.HandlerFunc {
 func errorPage() g.Node {
 	// HTML 5 boilerplate document
 	return c.HTML5(c.HTML5Props{
-		Title:		"404 - Not Found",
+		Title:    "404 - Not Found",
 		Language: "en",
 		Head: []g.Node{
 			html.Link(html.Rel("stylesheet"), html.Href("https://unpkg.com/tailwindcss@2.2.19/dist/base.min.css")),
@@ -39,7 +39,7 @@ func errorBody() g.Node {
 		html.Div(
 			html.Class("flex-col"),
 			html.H1(html.Class("text-center"), g.Text("Oops, page not found")),
-			html.Img(html.Src("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/gopherize-me_7Azjt_g4T.png?ik-sdk-version=javascript-1.4.3&updatedAt=1652731068953")),
+			html.Img(html.Src("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/gopherize-me_7Azjt_g4T_q1cdAiTxK.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1661761700596")),
 		),
 	)
 }

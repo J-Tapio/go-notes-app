@@ -7,7 +7,7 @@ import (
 
 func Home() (string, g.Node) {
 	return "Welcome!", html.Div(
-		html.Img(html.Src("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/gopher-laptop_CveXuKP2B.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1652719257522"),html.Class("mt-6 h-48 md:h-56 w-auto mx-auto md:mx-0")),
+		html.Img(html.Src("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/gopher-laptop_CveXuKP2B.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1652719257522"), html.Class("mt-6 h-48 md:h-56 w-auto mx-auto md:mx-0")),
 		html.H1(g.Text("Markdown archives")),
 		html.P(g.Raw(`These pages have been created with <a target="_blank" rel="noopener noreferrer" href="https://go.dev">Go</a>.`)),
 		html.Div(

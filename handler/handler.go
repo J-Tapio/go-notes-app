@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"flag"
 	"log"
+	"sync"
 	"net/http"
 
 	"go-notes-app/db"
@@ -19,7 +20,6 @@ var AppRouter *mux.Router
 
 func InitRouter() {
 	var dir string
-	flag.Parse()
 	flag.StringVar(&dir, "assets", ".", "the directory to serve files from. Defaults to the current dir")
 
 	router := mux.NewRouter()
@@ -27,7 +27,8 @@ func InitRouter() {
 	//router.NotFoundHandler = pages.ErrorPageHandler()
 	router.HandleFunc("/about", createHandler(pages.About())).Methods("GET")
 	router.HandleFunc("/playground", createHandler(pages.PlayGround())).Methods("GET")
-	router.HandleFunc("/notes", createHandler(pages.Notes())).Methods("GET")
+	//router.HandleFunc("/notes", createHandler(pages.Notes())).Methods("GET")
+	router.HandleFunc("/notes", createNotesHandler()).Methods("GET")
 	router.HandleFunc("/notes/{title}", createNoteHandler("Notes")).Methods("GET")
 	router.PathPrefix("/assets").Handler(http.StripPrefix("/", http.FileServer(http.Dir(dir))))
 	router.NotFoundHandler = pages.ErrorPageHandler()
@@ -37,6 +38,20 @@ func InitRouter() {
 func createHandler(title string, body g.Node) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		pages.Page(title, r.URL.Path, body).Render(w)
+	}
+}
+
+func createNotesHandler() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		// Fetch available documents
+		//? Could be done also just sequentially without using goroutine?
+		var wg sync.WaitGroup
+		wg.Add(1);
+		go db.GetAvailableNotes(&wg)
+		wg.Wait();
+		// Execute before rendering - this way the current available note links are being included to the body of html.
+		title, body := pages.Notes()
+		pages.Page(title, r.URL.Path, body).Render(w);
 	}
 }
 

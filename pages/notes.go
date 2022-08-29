@@ -3,7 +3,6 @@ package pages
 import (
 	g "github.com/maragudk/gomponents"
 	"github.com/maragudk/gomponents/html"
-	"log"
 
 	"go-notes-app/db"
 )
@@ -34,7 +33,7 @@ func noteLink(title string, tags []string) g.Node {
 
 func Notes() (string, g.Node) {
 	//TODO: Reconsider if available notes should be referred from elsewhere than db
-	db.GetAvailableNotes()
+	//db.GetAvailableNotes()
 
 	if len(db.AvailableNotes) == 0 {
 		// return html with error message
@@ -42,9 +41,6 @@ func Notes() (string, g.Node) {
 			html.H1(g.Text("Unfortunately something went wrong, notes not available.")),
 		)
 	} else {
-		// return html with links
-		log.Printf("In total %d documents available\n", len(db.AvailableNotes))
-		log.Println(db.AvailableNotes)
 		return "Notes", html.Div(
 			html.H1(g.Text("Notes")),
 			html.Div(html.Class("flex-column"),

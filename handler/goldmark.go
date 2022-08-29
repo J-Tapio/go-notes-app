@@ -14,7 +14,7 @@ import (
 
 func initGoldMark() goldmark.Markdown {
 	return goldmark.New(
-		goldmark.WithExtensions(extension.GFM, latex.NewLatex(), highlighting.NewHighlighting(
+		goldmark.WithExtensions(extension.GFM, extension.Table, latex.NewLatex(), highlighting.NewHighlighting(
 			highlighting.WithStyle("fruity"),
 		)),
 		goldmark.WithParserOptions(
@@ -22,6 +22,7 @@ func initGoldMark() goldmark.Markdown {
 		),
 		goldmark.WithRendererOptions(
 			html.WithHardWraps(),
+			html.WithUnsafe(),
 		),
 	)
 }

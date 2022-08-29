@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os"
+	"sync"
 	"time"
 
 	//"github.com/joho/godotenv"
@@ -45,6 +46,8 @@ func InitDBConnection() {
 	if err != nil {
 		log.Printf("Error while connecting to Mongo database, error:\n%s", err)
 		return
+	} else {
+		log.Println("Successfully connected to database")
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -80,9 +83,8 @@ func Disconnect() {
 	}
 }
 
-func GetAvailableNotes() {
+func GetAvailableNotes(wg *sync.WaitGroup) {
 	log.Println("Fetching available documents")
-
 	// If initial db connection did not fail
 	if dbClient != nil {
 
@@ -94,8 +96,12 @@ func GetAvailableNotes() {
 		if err != nil {
 			log.Println(err)
 			AvailableNotes = []Note{}
+		} else {
+			log.Printf("Documents available, total: %v", len(AvailableNotes))
+			log.Println(AvailableNotes)
 		}
 	}
+	wg.Done()
 }
 
 func GetDocument(title string) (bool, NoteFile) {

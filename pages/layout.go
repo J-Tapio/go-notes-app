@@ -119,8 +119,8 @@ func contactLink(alt, link, title, img string) g.Node {
 func Footer() g.Node {
 	return html.Footer(html.Class("py-8 text-center"),
 		html.Div(
-			html.Class("flex justify-between items-center"),
-			html.Img(html.Class("h-20 w-auto"), html.Src("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/golang-gopher-left_Ep0uc1n6X.png?ik-sdk-version=javascript-1.4.3&updatedAt=1652719257184")),
+			html.Class("flex justify-between items-end"),
+			html.Img(html.Class("h-10 sm:h-14 md:h-20 w-auto"), html.Src("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/golang-gopher-left_Ep0uc1n6X.png?ik-sdk-version=javascript-1.4.3&updatedAt=1652719257184")),
 			html.Div(
 				html.Class("sm:text-lg md:text-xl"),
 				html.P(g.Text("Juha-Tapio Turpeinen")),
@@ -131,7 +131,7 @@ func Footer() g.Node {
 					})),
 				),
 			),
-			html.Img(html.Class("h-20 w-auto"), html.Src("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/golang-gopher-right_Tcgh-recv.png?ik-sdk-version=javascript-1.4.3&updatedAt=1652719257280")),
+			html.Img(html.Class("h-10 sm:h-14 md:h-20 w-auto"), html.Src("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/golang-gopher-right_Tcgh-recv.png?ik-sdk-version=javascript-1.4.3&updatedAt=1652719257280")),
 		),
 	)
 }

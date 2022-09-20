@@ -57,7 +57,7 @@ func Navbar() g.Node {
 }
 
 func Container(children ...g.Node) g.Node {
-	return html.Div(html.Class("max-w-5xl mx-auto prose md:prose-md lg:prose-lg xl:prose-2xl px-2 mt-10 sm:px-6 lg:px-8"), g.Group((children)))
+	return html.Div(html.Class("max-w-5xl mx-auto prose md:prose-md lg:prose-lg xl:prose-xl px-2 mt-10 sm:px-6 lg:px-8"), g.Group((children)))
 }
 
 type socialLink struct {

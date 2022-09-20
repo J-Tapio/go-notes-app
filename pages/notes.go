@@ -1,6 +1,7 @@
 package pages
 
 import (
+	"net/url"
 	g "github.com/maragudk/gomponents"
 	"github.com/maragudk/gomponents/html"
 
@@ -8,7 +9,7 @@ import (
 )
 
 func noteLink(title string, tags []string) g.Node {
-	noteLink := "/notes/" + title
+	noteLink := "/notes/" + url.QueryEscape(title)
 
 	return html.Div(
 		html.Class("mb-8 note-container pb-2 pl-2 rounded"),

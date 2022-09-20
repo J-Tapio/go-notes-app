@@ -12,22 +12,37 @@ import (
 // https://staticcheck.io/docs/configuration/options/
 // https://github.com/golang/lint/issues/179
 
-func Page(title, path string, body g.Node) g.Node {
-	// HTML 5 boilerplate document
-	return c.HTML5(c.HTML5Props{
-		Title:    title,
-		Language: "en",
-		Head: []g.Node{
+func loadAssets(title string) []g.Node {
+	if title != "Markdown editor" {
+		return []g.Node{
 			html.Link(html.Rel("icon"), html.Type("image/x-icon"), html.Href("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/favicon-32x32_9t5v8KhSP.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656174819184")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/base.min.css")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/components.min.css")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/typography.min.css")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/utilities.min.css")),
 			html.Link(html.Rel("stylesheet"), html.Href("/assets/css/app.css")),
-			html.Link(html.Rel("stylesheet"), html.Href("https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css")),
-			html.Script(html.Src("https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js")),
-			html.Script(html.Src("assets/editor.toolbar.js")),
-		},
+		}
+	} else {
+		return []g.Node{
+			html.Link(html.Rel("icon"), html.Type("image/x-icon"), html.Href("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/favicon-32x32_9t5v8KhSP.png?ik-sdk-version=javascript-1.4.3&updatedAt=1656174819184")),
+				html.Link(html.Rel("stylesheet"), html.Href("/assets/css/base.min.css")),
+				html.Link(html.Rel("stylesheet"), html.Href("/assets/css/components.min.css")),
+				html.Link(html.Rel("stylesheet"), html.Href("/assets/css/typography.min.css")),
+				html.Link(html.Rel("stylesheet"), html.Href("/assets/css/utilities.min.css")),
+				html.Link(html.Rel("stylesheet"), html.Href("/assets/css/app.css")),
+				html.Link(html.Rel("stylesheet"), html.Href("https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css")),
+				html.Script(html.Src("https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js")),
+				html.Script(html.Src("assets/editor.toolbar.js")),
+		}
+	}
+}
+
+func Page(title, path string, body g.Node) g.Node {
+	// HTML 5 boilerplate document
+	return c.HTML5(c.HTML5Props{
+		Title:    title,
+		Language: "en",
+		Head: loadAssets(title),
 		Body: []g.Node{
 			Navbar(),
 			Container(

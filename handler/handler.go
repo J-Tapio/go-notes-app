@@ -4,8 +4,9 @@ import (
 	"bytes"
 	"flag"
 	"log"
-	"sync"
 	"net/http"
+	"net/url"
+	"sync"
 
 	"go-notes-app/db"
 	"go-notes-app/pages"
@@ -24,14 +25,13 @@ func InitRouter() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", createHandler(pages.Home())).Methods("GET")
-	//router.NotFoundHandler = pages.ErrorPageHandler()
 	router.HandleFunc("/about", createHandler(pages.About())).Methods("GET")
 	router.HandleFunc("/playground", createHandler(pages.PlayGround())).Methods("GET")
-	//router.HandleFunc("/notes", createHandler(pages.Notes())).Methods("GET")
 	router.HandleFunc("/notes", createNotesHandler()).Methods("GET")
 	router.HandleFunc("/notes/{title}", createNoteHandler("Notes")).Methods("GET")
 	router.PathPrefix("/assets").Handler(http.StripPrefix("/", http.FileServer(http.Dir(dir))))
 	router.NotFoundHandler = pages.ErrorPageHandler()
+
 	AppRouter = router
 }
 
@@ -60,7 +60,7 @@ func createNoteHandler(title string) http.HandlerFunc {
 	// Fail - Render fail page.
 	return func(w http.ResponseWriter, r *http.Request) {
 		var document db.NoteFile
-		documentTitle := mux.Vars(r)["title"]
+		documentTitle,_ := url.QueryUnescape(mux.Vars(r)["title"])
 		log.Println(documentTitle)
 
 		// Check from database the requested note

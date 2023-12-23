@@ -16,12 +16,12 @@ func About() (string, g.Node) {
 				html.H4(html.Class(""), g.Text("Juha-Tapio Turpeinen")),
 				html.H6(html.Class(""), g.Text("Physiotherapist OMT")),
 				html.H6(html.Class(""), g.Text("MSc. Sport Sciences")),
-				html.H6(html.Class(""), g.Text("Fullstack Web developer")),
+				html.H6(html.Class(""), g.Text("Fullstack Web developer(?)")),
 			),
 		),
 		html.Div(
 			html.Class("flex items-center"),
-			html.P(g.Text("Currently living in Berlin, Germany with my girlfriend and our little daughter. Originally from Finland.")),
+			html.P(g.Text("Currently living in Lahti, Finland.")),
 			html.Img(html.Class("h-32 md:h-96 object-cover w-auto mx-auto"), html.Src("https://ik.imagekit.io/htg3gsxgz/Markdown_archives/suomikartta_soOAbgHNG.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1652719258402")),
 		),
 		html.Div(
